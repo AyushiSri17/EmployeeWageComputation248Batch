@@ -10,22 +10,26 @@ namespace EmployeeWageComputation
     {
         public static void Main(string[] args)
         {
-            int isPresent = 1;
-            Console.WriteLine("Welcome to EmployeeWage Computation");
+            const int FULL_TIME = 1;
+            const int EMP_RATE_PER_HR = 20;
+            int empHrs = 0, empWage = 0;
 
-            //UC1 - EmployeeAttendance
+            Console.WriteLine("Welcome to EmployeeWage Computation Problem");
+            //UC2 - CalculateDailyWage
             Random random = new Random();
-            //Next(maxValue) method is used , here we can use Next(minValue,maxValue) also
-            int empAttendance = random.Next(2);
-            Console.WriteLine(empAttendance+"\n");
-            if (empAttendance == isPresent)
+            int empAttendance = random.Next(0, 2);
+            if (empAttendance == FULL_TIME)
             {
-                Console.WriteLine("Employee is present");
+                Console.WriteLine("Emplouee is present");
+                empHrs = 8;
             }
             else
             {
                 Console.WriteLine("Employee is Absent");
+                empHrs = 0;
             }
+            empWage = empHrs * EMP_RATE_PER_HR;
+            Console.WriteLine("Employee Wage:{0}", empWage);
             Console.ReadLine();
         }
     }
