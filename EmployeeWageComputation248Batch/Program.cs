@@ -11,17 +11,23 @@ namespace EmployeeWageComputation
         public static void Main(string[] args)
         {
             const int FULL_TIME = 1;
+            const int PART_TIME = 2;
             const int EMP_RATE_PER_HR = 20;
             int empHrs = 0, empWage = 0;
 
-            Console.WriteLine("Welcome to EmployeeWage Computation Problem");
-            //UC2 - CalculateDailyWage
+            Console.WriteLine("Welcome to Employee Wage Computation Problem");
+            //UC3 - Calculating Daily Wage and part time wage
             Random random = new Random();
-            int empAttendance = random.Next(0, 2);
+            int empAttendance = random.Next(0,3);
             if (empAttendance == FULL_TIME)
             {
-                Console.WriteLine("Emplouee is present");
+                Console.WriteLine("Full Time Employee is present");
                 empHrs = 8;
+            }
+            else if (empAttendance == PART_TIME)
+            {
+                Console.WriteLine("Part Time Employee is present");
+                empHrs = 4;
             }
             else
             {
