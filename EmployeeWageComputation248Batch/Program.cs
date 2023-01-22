@@ -16,26 +16,27 @@ namespace EmployeeWageComputation
             int empHrs = 0, empWage = 0;
 
             Console.WriteLine("Welcome to Employee Wage Computation Problem");
-            //UC3 - Calculating Daily Wage and part time wage
+
+            //UC4 - Calculate Daily Wage Using SwitchCase
             Random random = new Random();
             int empAttendance = random.Next(0,3);
-            if (empAttendance == FULL_TIME)
+            switch (empAttendance)
             {
-                Console.WriteLine("Full Time Employee is present");
-                empHrs = 8;
-            }
-            else if (empAttendance == PART_TIME)
-            {
-                Console.WriteLine("Part Time Employee is present");
-                empHrs = 4;
-            }
-            else
-            {
-                Console.WriteLine("Employee is Absent");
-                empHrs = 0;
+                case FULL_TIME:
+                    Console.WriteLine("Full Time Employee is Present");
+                    empHrs = 8;
+                    break;
+                case PART_TIME:
+                    Console.WriteLine("Part Time Employee is Present");
+                    empHrs = 4;
+                    break;
+                default:
+                    Console.WriteLine("Employee is Absent");
+                    empHrs = 0;
+                    break;
             }
             empWage = empHrs * EMP_RATE_PER_HR;
-            Console.WriteLine("Employee Wage:{0}", empWage);
+            Console.WriteLine("Employee Wage: {0} ",empWage);
             Console.ReadLine();
         }
     }
