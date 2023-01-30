@@ -8,16 +8,20 @@ namespace EmployeeWageComputation
 {
     public class Program
     {
+        const int FULL_TIME = 1;
+        const int PART_TIME = 2;
+        const int MAX_WORKING_DAYS = 20;
+        const int MAX_WORKING_HRS = 100;
+        const int EMP_RATE_PER_HR = 20;
         public static void Main(string[] args)
         {
-            const int FULL_TIME = 1;
-            const int PART_TIME = 2;
-            const int MAX_WORKING_DAYS = 20;
-            const int MAX_WORKING_HRS = 100;
-            const int EMP_RATE_PER_HR = 20;
-            int empHrs = 0, empWage = 0, day = 1, totalWage = 0, totalHrs = 0;
-
             Console.WriteLine("Welcome to Employee Wage Computation Problem");
+            ComputeEmployeeWage();
+            Console.ReadLine();
+        }
+        public static void ComputeEmployeeWage()
+        {    
+            int empHrs = 0, empWage = 0, day = 1, totalWage = 0, totalHrs = 0;
 
             //UC6 - Calculate Wage Till Condition Reached
             Random random = new Random();
@@ -46,7 +50,7 @@ namespace EmployeeWageComputation
                 totalHrs += empHrs;
             }
             Console.WriteLine("\nTotal Employee Wage for {0} days: {1} and total working hours {2}", (day - 1), totalWage, totalHrs);
-            Console.ReadLine();
+
         }
     }
 }
