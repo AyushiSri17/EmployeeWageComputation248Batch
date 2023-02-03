@@ -6,22 +6,38 @@ using System.Threading.Tasks;
 
 namespace EmployeeWageComputation
 {
-    public class Program
+    public class EmployeeWageBuilder
     {
         public const int FULL_TIME = 1;
         public const int PART_TIME = 2;
         //const int MAX_WORKING_DAYS = 20;
         //const int MAX_WORKING_HRS = 100;
         //const int EMP_RATE_PER_HR = 20;
+        public string company;
+        public int maxWorkingDays, maxWorkingHrs, empRatePerHr;
+
+        //constructor
+        public EmployeeWageBuilder(string company, int maxWorkingDays, int maxWorkingHrs, int empRatePerHr)
+        {
+            this.company = company;
+            this.maxWorkingDays = maxWorkingDays;
+            this.maxWorkingHrs= maxWorkingHrs;
+            this.empRatePerHr = empRatePerHr;
+        }
         public static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Employee Wage Computation Problem");
-            ComputeEmployeeWage("BridgeLabz",20,100,35);
-            ComputeEmployeeWage("Google", 24, 45, 30);
-            ComputeEmployeeWage("MicroSoft", 18, 55, 40);
+
+            EmployeeWageBuilder deloitte = new EmployeeWageBuilder("BridgeLabz", 20, 100, 35);
+            deloitte.ComputeEmployeeWage();
+            EmployeeWageBuilder bridge = new EmployeeWageBuilder("Google", 24, 45, 30);
+            bridge.ComputeEmployeeWage();
+            EmployeeWageBuilder google = new EmployeeWageBuilder("MicroSoft", 18, 55, 40);
+            google.ComputeEmployeeWage();
+            
             Console.ReadLine();
         }
-        public static void ComputeEmployeeWage(string company, int maxWorkingDays, int maxWorkingHrs, int empRatePerHr)
+        public void ComputeEmployeeWage()
         {    
             int empHrs = 0, empWage = 0, day = 1, totalWage = 0, totalHrs = 0;
 
