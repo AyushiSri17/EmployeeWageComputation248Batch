@@ -7,48 +7,56 @@ using System.Threading.Tasks;
 
 namespace EmployeeWageComputation
 {
-    public class EmployeeWageBuilder
+    public class EmployeeWageBuilder:IComputeEmpWage
     {
         public const int FULL_TIME = 1;
         public const int PART_TIME = 2;
         //const int MAX_WORKING_DAYS = 20;
         //const int MAX_WORKING_HRS = 100;
         //const int EMP_RATE_PER_HR = 20;
-        CompanyDetails[] companies;
-        int numOfCompany = 0;
+        //CompanyDetails[] companies;
+        List<CompanyDetails> list;
+        Dictionary<string, CompanyDetails> KeyValues;
+        //int numOfCompany = 0;
 
         //constructor
         public EmployeeWageBuilder()
         {
-            companies= new CompanyDetails[3];
+            //companies= new CompanyDetails[3];
+            list = new List<CompanyDetails>();
+            KeyValues = new Dictionary<string, CompanyDetails>();
         }
         public void AddCompanyDetails(string company, int maxWorkingDays, int maxWorkingHrs, int empRatePerHr)
         {
           CompanyDetails companyDetails = new CompanyDetails(company,maxWorkingDays,maxWorkingHrs,empRatePerHr);
-            companies[numOfCompany] = companyDetails;
-            numOfCompany++;
+            //companies[numOfCompany] = companyDetails;
+            //numOfCompany++;
+            list.Add(companyDetails);
+            KeyValues.Add(company, companyDetails);
         }
 
         public void IterateOverCompanies()
         {
-            for(int i=0;i<companies.Length;i++) 
+            //for(int i=0;i<companies.Length;i++) 
+            //{
+            //    int totalWage = ComputeEmployeeWage(companies[i]);
+            //    companies[i].SetTotalWage(totalWage);
+            //    //Console.WriteLine(companies[i].company + " " + companies[i].totalWage);
+            //    Console.WriteLine(companies[i]);
+            //}
+            for (int i = 0; i < list.Count; i++)
             {
-                int totalWage = ComputeEmployeeWage(companies[i]);
-                companies[i].SetTotalWage(totalWage);
-                //Console.WriteLine(companies[i].company + " " + companies[i].totalWage);
-                Console.WriteLine(companies[i]);
+                int totalWage = ComputeEmployeeWage(list[i]);
+                list[i].SetTotalWage(totalWage);
+                Console.WriteLine(list[i]);
             }
         }
-        public static void Main(string[] args)
+        //Dictionary to fetch particular company details
+        public void GetTotalWageOnCompany(string comp)
         {
-            Console.WriteLine("Welcome to Employee Wage Computation Problem");
-            EmployeeWageBuilder builder = new EmployeeWageBuilder();
-            builder.AddCompanyDetails("BridgeLabz", 20, 100, 35);
-            builder.AddCompanyDetails("Google", 24, 45, 30);
-            builder.AddCompanyDetails("MicroSoft", 18, 55, 40);
-            builder.IterateOverCompanies();                                   
-            Console.ReadLine();
+            Console.WriteLine("\nTotalWage for {0} is {1}", comp, KeyValues[comp].totalWage);
         }
+        
         public int ComputeEmployeeWage(CompanyDetails details)
         {    
             int empHrs = 0, empWage = 0, day = 1, totalWage = 0, totalHrs = 0;
@@ -81,6 +89,18 @@ namespace EmployeeWageComputation
             }
             //Console.WriteLine("\nTotal Employee Wage for {3} {0} days: is {1} and total working hours {2}", (day - 1), totalWage, totalHrs, details.company);
             return totalWage;
+        }
+
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to Employee Wage Computation Problem");
+            EmployeeWageBuilder builder = new EmployeeWageBuilder();
+            builder.AddCompanyDetails("BridgeLabz", 20, 100, 35);
+            builder.AddCompanyDetails("Google", 24, 45, 30);
+            builder.AddCompanyDetails("MicroSoft", 18, 55, 40);
+            builder.IterateOverCompanies();
+            builder.GetTotalWageOnCompany("BridgeLabz");
+            Console.ReadLine();
         }
     }
 }
